@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Simple Passport Login
+  p 
+    a(href="/private") Private page
+  if (!user)
+    p
+      a(href="/login") Login
+  else
+    p
+     a(href="/logout") Logout

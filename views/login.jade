@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Login
+  form(role="form", action="/login",method="post")
+    table
+      tr
+        td
+          span Username
+        td
+          input(type="text", name="username")
+      tr
+        td
+          span Password
+        td
+          input(type="password", name="password", placeholder="Password")
+      tr
+        td(colspan="2")
+          button(type="submit") Submit
+          a(href='/')
+            button(type="button") Cancel

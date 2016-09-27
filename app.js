@@ -4,9 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var users = require('./routes/private');
+var login = require('./routes/login');
+var logout = require('./routes/logout');
 
 var app = express();
 
@@ -21,9 +25,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: "local"}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/private', users);
+app.use('/login', login);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,5 +65,35 @@ app.use(function(err, req, res, next) {
   });
 });
 
+const user = {  
+  username: 'admin',
+  password: 'password',
+  id: 123
+}
+
+passport.serializeUser(function(user, done) {
+   done(null, user.id);
+});
+
+passport.deserializeUser(function(obj, done) {
+   done(null, obj);
+});
+
+passport.use('local', new LocalStrategy(
+  function(username, password, done) {
+
+    // find the user by username here
+    var findUser = user;
+
+    if (username == findUser.username && password == findUser.password)
+      return done(null, findUser);
+    else
+      return done(null, false);
+  }
+));
 
 module.exports = app;
+
+app.listen(app.get('port'), function(){
+  console.log(("Express server listening on port " + app.get('port')))
+});
