@@ -1,7 +1,7 @@
-#PassportSimpleLogin
+# PassportSimpleLogin
 *Demonstration of Passport authentication middleware with Express and how it can be used to create a simple cookie based login*
 
-##How this was made
+## How this was made
 Using https://expressjs.com/en/starter/generator.html
 1. npm install express-generator -g
 2. express
@@ -10,8 +10,8 @@ Using https://expressjs.com/en/starter/generator.html
 5. npm install passport-local --save
 6. npm install express-session --save
 
-##Setup instructions
-###pre-reqs
+## Setup instructions
+### pre-reqs
 Node, npm
 
 1. npm install
