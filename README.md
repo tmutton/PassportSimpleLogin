@@ -1,4 +1,4 @@
-# PassportSimpleLogin
+# Simple Passport Demo
 *Demonstration of Passport authentication middleware with Express and how it can be used to create a simple cookie based login*
 
 ## How this was made
